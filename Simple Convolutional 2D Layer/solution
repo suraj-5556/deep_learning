@@ -1,0 +1,18 @@
+import numpy as np
+
+def simple_conv2d(input_matrix: np.ndarray, kernel: np.ndarray, padding: int, stride: int):
+	input_height, input_width = input_matrix.shape
+	kernel_height, kernel_width = kernel.shape
+
+	# Your code here
+	output_matrix=np.pad(input_matrix, pad_width=padding, mode='constant', constant_values=0)
+
+	out=[]
+
+	for i in range (0,len(output_matrix)- kernel_height + 1,stride):
+		temp=[]
+		for j in range (0,len(output_matrix[0])- kernel_width + 1,stride):
+			temp.append(round(np.sum(output_matrix[i:i+kernel_height,j:j+kernel_width]*kernel),1))
+		out.append(temp)
+    
+	return out
